@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments | Ananya Mahawar</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --paper:     #F4F7FF;
+  --white:     #FFFFFF;
+  --ink:       #0E1B4D;
+  --muted:     #4A5578;
+  --cobalt:    #1E40D8;
+  --turquoise: #0E9F9A;
+  --marigold:  #FFB627;
+  --orange:    #E8591D;
+  --teal-deep: #0A7C78;
+  --display:   'Bricolage Grotesque', system-ui, sans-serif;
+  --body:      'Figtree', system-ui, sans-serif;
+  --ease:      cubic-bezier(.2, .8, .2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  overflow-x: clip;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+main { flex: 1; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; border-radius: 6px; }
+
+/* ============ PAGE ============ */
+.assignment {
+  position: relative; overflow: hidden;
+  padding: clamp(32px, 6vw, 64px) 24px clamp(64px, 9vw, 112px);
+}
+.assignment::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(30, 64, 216, .18) 1.5px, transparent 0);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 12%, transparent 40%);
+          mask-image: linear-gradient(to bottom, #000 12%, transparent 40%);
+}
+.assignment-grid { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; }
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 700 .95rem var(--body); text-decoration: none;
+  padding: 10px 22px; border-radius: 999px;
+  background: var(--white); border: 2px solid var(--ink); color: var(--ink);
+  margin-bottom: 28px;
+  transition: transform .25s var(--ease), background .25s, border-color .25s, color .25s;
+}
+.back-btn:hover { background: var(--marigold); border-color: var(--marigold); transform: translateY(-3px); }
+
+.page-title {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px;
+}
+.page-lead { max-width: 58ch; color: var(--muted); font-size: 1.1rem; }
+
+/* ============ CARDS ============ */
+.assign-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px; margin-top: 48px;
+}
+.card {
+  --c: var(--cobalt);
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--white); border-radius: 22px; overflow: hidden;
+  border: 1px solid rgba(14, 27, 77, .08);
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+/* Top-band colour options. No class = cobalt. */
+.card:has(.t2) { --c: var(--turquoise); }
+.card:has(.t3) { --c: var(--marigold); --ic: var(--ink); }
+.card:has(.t4) { --c: var(--ink); }
+.card:has(.t5) { --c: var(--orange); }
+.card:has(.t6) { --c: var(--teal-deep); }
+
+.card:hover, .card:focus-within { transform: translateY(-8px); box-shadow: 0 30px 50px -28px rgba(14, 27, 77, .5); }
+
+/* One link covers the whole card, so the entire card is clickable */
+.card-link { position: absolute; inset: 0; z-index: 2; border-radius: 22px; }
+.card-link:focus-visible { outline: 3px solid var(--cobalt); outline-offset: -3px; }
+
+.card-top {
+  position: relative; height: 128px; background-color: var(--c);
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, .3) 0 5px, transparent 6px),
+    radial-gradient(circle, rgba(255, 255, 255, .15) 0 9px, transparent 10px);
+  background-size: 30px 30px; background-position: 0 0, 15px 15px;
+  transition: background-position 1s var(--ease);
+}
+.card:hover .card-top { background-position: 30px 30px, 45px 45px; }
+.card-icon {
+  position: absolute; left: 24px; bottom: -28px;
+  width: 60px; height: 66px; display: grid; place-items: center;
+  border-radius: 30px 30px 10px 10px; background: var(--white);
+  color: var(--ic, var(--c)); font-size: 1.5rem;
+  box-shadow: 0 10px 20px -10px rgba(14, 27, 77, .5);
+  transition: transform .4s var(--ease);
+}
+.card:hover .card-icon { transform: translateY(-6px); }
+
+.card-body { flex: 1; display: flex; flex-direction: column; padding: 46px 26px 28px; }
+.card h3 { font-family: var(--display); font-size: 1.4rem; margin-bottom: 8px; }
+.task { color: var(--muted); margin-bottom: 22px; }
+
+.open-btn {
+  align-self: flex-start; margin-top: auto;
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 700 .95rem var(--body);
+  padding: 11px 22px; border-radius: 999px;
+  background: var(--ink); color: #fff; border: 2px solid var(--ink);
+  transition: transform .25s var(--ease), background .25s, border-color .25s, box-shadow .25s;
+}
+.card:hover .open-btn { background: var(--cobalt); border-color: var(--cobalt); box-shadow: 0 12px 24px -10px rgba(30, 64, 216, .6); }
+
+/* ============ FOOTER ============ */
+footer { background: var(--ink); color: rgba(255, 255, 255, .8); text-align: center; padding: 32px 24px; font-size: .95rem; }
+footer p + p { margin-top: 4px; color: rgba(255, 255, 255, .6); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 560px) {
+  .assign-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+
+<body class="assignments-page">
+<main>
+<section class="assignment" id="myassignments">
+  <div class="assignment-grid">
+    <a class="back-btn" href="index.html">
+      <i class="fas fa-house"></i> Back to home
+    </a>
+    <h1 class="page-title">My assignments</h1>
+    <p class="page-lead">Key assignments and projects from the HTML &amp; CSS curriculum.</p>
+
+    <!-- ==========================================================
+         HOW TO EDIT
+         Each card has ONE link: <a class="card-link" href="...">.
+         Put the path to your assignment file in that href and the whole
+         card becomes clickable, e.g. href="assignments/assignment-1.html"
+         Also change the <h3> title and the <p class="task"> description.
+         Top-band colour: class="card-top" (cobalt), "card-top t2" (turquoise),
+         t3 (marigold), t4 (dark blue), t5 (orange), t6 (deep teal).
+         ========================================================== -->
+
+    <div class="assign-grid">
+
+      <article class="card" id="project-1">
+        <!-- PUT YOUR ASSIGNMENT PATH IN href BELOW (this one link makes the whole card clickable) -->
+        <a class="card-link" href="Assets/Assignment-1 Batch b/Basic.html" aria-label="Open Background Image project"></a>
+        <div class="card-top">
+          <div class="card-icon"><i class="fas fa-image"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Background Image</h3>
+          <p class="task">A full-screen background image with a centred name and short description on top. Practised background-image and text positioning.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-2">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 2/index.html" aria-label="Open Newspaper Layout project"></a>
+        <div class="card-top t2">
+          <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Newspaper Layout</h3>
+          <p class="task">A newspaper page with a scrolling date marquee and a multi-column article layout. Practised headings, text styling and organising content into sections.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-3">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 3/index.html" aria-label="Open Flexbox project"></a>
+        <div class="card-top t3">
+          <div class="card-icon"><i class="fas fa-object-group"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Flexbox</h3>
+          <p class="task">Practice with flexbox using nested divs in a muted colour palette. Learned how containers align, space and arrange the boxes inside them.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-4">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 4/index.html" aria-label="Open Dynamic Gallery project"></a>
+        <div class="card-top t4">
+          <div class="card-icon"><i class="fas fa-images"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Dynamic Gallery</h3>
+          <p class="task">A dynamic gallery made from one image used many times at different sizes. Practised arranging pictures of varying dimensions in one layout.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-5">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 5/index.html" aria-label="Open Profile Card project"></a>
+        <div class="card-top t5">
+          <div class="card-icon"><i class="fas fa-id-card"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Profile Card</h3>
+          <p class="task">A neat personal profile card with icons beside each detail. This is where I learned how icon libraries work and how to connect them to a page.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-6">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 6/index.html" aria-label="Open Navigation Bar project"></a>
+        <div class="card-top t6">
+          <div class="card-icon"><i class="fas fa-bars"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Navigation Bar</h3>
+          <p class="task">A multi-page site where every page has the same layout and navbar but its own colour scheme. Practised turning a list into a menu and linking pages.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-7">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 7/index.html" aria-label="Open IFrame project"></a>
+        <div class="card-top">
+          <div class="card-icon"><i class="fas fa-window-maximize"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>IFrame</h3>
+          <p class="task">Numbered links that load each assignment inside an iframe on the same page. Learned how the target attribute connects an anchor tag to an iframe.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-8">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 8/assignment 8.html" aria-label="Open Table project"></a>
+        <div class="card-top t2">
+          <div class="card-icon"><i class="fas fa-table"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Table</h3>
+          <p class="task">A table of electronic items, prices and totals that uses the full set of table elements. Learned how rows, headings and cells fit together to organise data.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-9">
+        <a class="card-link" href="Assets/Assignment-9 Batch/Box Plotting.html" aria-label="Open Box Plotting project"></a>
+        <div class="card-top t3">
+          <div class="card-icon"><i class="fas fa-vector-square"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Box Plotting</h3>
+          <p class="task">A box plotter styled like the dev tools box model view. Learned what margin and padding are and how they differ: space outside the box versus space inside it.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-10">
+        <a class="card-link" href="Assets/Yukta Manghnani assignment 10/assignment 10.html" aria-label="Open Login and Signup Page project"></a>
+        <div class="card-top t4">
+          <div class="card-icon"><i class="fas fa-right-to-bracket"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>Login &amp; Signup Page</h3>
+          <p class="task">A login page and a signup page that link to each other. Learned how forms work, from input types and labels to the attributes that control them.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+      <article class="card" id="project-11">
+        <a class="card-link" href="Assets/Assignment-11/Animations.html" aria-label="Open CSS Animations project"></a>
+        <div class="card-top t5">
+          <div class="card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+        </div>
+        <div class="card-body">
+          <h3>CSS Animations</h3>
+          <p class="task">A page of boxes and circles that each show a different transition effect: translate, scale, rotate and more. Practised CSS animations.</p>
+          <span class="open-btn">Open project →</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>© 2026 Ananya Mahawar | Student Portfolio | Dezyne École College</p>
+  <p>BCA First Year | HTML5 &amp; CSS3 Assignment Project</p>
+</footer>
+
+</body>
+</html>
