@@ -590,7 +590,28 @@ nav li:last-child a:hover {
 .assignments {
     padding: 90px 8%;
 }
-
+.more-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+}
+.more-btn{
+    height:50px;
+    padding:0 28px;
+    display:inline-flex;
+    align-items:center;
+    border-radius:30px;
+    background-color:black;
+    color:var(--white);
+    text-decoration:none;
+    font-family:var(--body);
+    font-weight:600;
+    transition:transform .3s var(--ease),background-color:.3s var(--ease);
+}
+.more-btn:hover{
+    background-color:blue;
+    transform:translateY (-2px);
+}
 .assignment-card {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
